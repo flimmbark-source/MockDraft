@@ -1,0 +1,396 @@
+{
+  "year": 2026,
+  "updatedAt": "2025-10-22T07:32:24Z",
+  "teams": [
+    {
+      "name": "Utah Jazz",
+      "logo": "https://cdn.nba.com/logos/nba/1610612762/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 1,
+          "player": "Darryn Peterson",
+          "position": "SG",
+          "school": "Kansas",
+          "bio": "Dynamic scoring guard who can create his own shot at all three levels and facilitate when needed. He’s an elite guard prospect expected to lead Kansas’s offense from day one.",
+          "stats": { "PPG": 30.4, "RPG": 7.2, "APG": 7.4 }
+        }
+      ]
+    },
+    {
+      "name": "Washington Wizards",
+      "logo": "https://cdn.nba.com/logos/nba/1610612764/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 2,
+          "player": "Cameron Boozer",
+          "position": "PF/C",
+          "school": "Duke",
+          "bio": "Fundamentally sound big with a mature game and winning intangibles. A 6'10\" forward who dominates the paint but can also stretch the floor (nearly 38% from three in high school) and make smart plays on both ends.",
+          "stats": { "PPG": 22.6, "RPG": 12.0, "APG": 3.1 }
+        },
+        {
+          "pick": 30,
+          "player": "Alex Condon",
+          "position": "C",
+          "school": "Florida",
+          "bio": "Explosive 6'11\" center from Australia who provided a spark off the bench for Florida and is now poised for a bigger role. Condon is an active finisher and lob threat who runs the floor very well for his size. He also shows promise as a floor spacer, having demonstrated three-point range in spurts. He’s a fluid passer for a big and protects the rim with energy. The key for him will be improving his consistency at the foul line and proving he can knock down the open three regularly. If he does, Condon’s blend of athleticism, defense, and emerging shooting could land him in the first round.",
+          "stats": { "PPG": 8.5, "RPG": 5.2, "APG": 1.8 }
+        }
+      ]
+    },
+    {
+      "name": "Brooklyn Nets",
+      "logo": "https://cdn.nba.com/logos/nba/1610612751/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 3,
+          "player": "AJ Dybantsa",
+          "position": "SF",
+          "school": "BYU",
+          "bio": "Explosive 6'9\" wing with elite athleticism and scoring ability. Shows star potential as a shot-maker and above-the-rim finisher, though he’ll need to improve his shot selection and consistency to maximize his immense talent.",
+          "stats": { "PPG": 20.1, "RPG": 7.3, "APG": 3.6 }
+        }
+      ]
+    },
+    {
+      "name": "Charlotte Hornets",
+      "logo": "https://cdn.nba.com/logos/nba/1610612766/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 4,
+          "player": "Jayden Quaintance",
+          "position": "PF",
+          "school": "Kentucky",
+          "bio": "Athletic 6'10\" forward/center who held his own in college as a 17-year-old. He’s a high-upside rim protector and efficient interior scorer coming off an ACL injury, now looking to build on his shot-blocking and rebounding prowess at Kentucky.",
+          "stats": { "PPG": 9.4, "RPG": 7.9, "APG": 1.5 }
+        }
+      ]
+    },
+    {
+      "name": "Toronto Raptors",
+      "logo": "https://cdn.nba.com/logos/nba/1610612761/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 5,
+          "player": "Nate Ament",
+          "position": "SF",
+          "school": "Tennessee",
+          "bio": "Fast-rising 6'9\" wing with guard-like skills and a smooth shooting stroke. He is a versatile offensive player who can do a bit of everything, but will need to add muscle to his lean frame to better handle physical defense.",
+          "stats": { "PPG": 16.5, "RPG": 5.2, "APG": 3.8 }
+        }
+      ]
+    },
+    {
+      "name": "Atlanta Hawks",
+      "logo": "https://cdn.nba.com/logos/nba/1610612737/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 6,
+          "player": "Koa Peat",
+          "position": "PF",
+          "school": "Arizona",
+          "bio": "Strong 6'8\" forward with a 235-pound frame and a polished offensive game. Uses strength, balance and touch to score methodically in the mid-range and post, and has been expanding his range. Lacks top-tier explosiveness, but his productivity and physicality stand out.",
+          "stats": { "PPG": 18.7, "RPG": 7.4, "APG": 4.0 }
+        },
+        {
+          "pick": 18,
+          "player": "Karter Knox",
+          "position": "SF",
+          "school": "Arkansas",
+          "bio": "Strong and athletic 6'6\" wing who found his stride late last season at Arkansas. Knox uses his powerful frame to attack the rim and finish through contact, and he’s comfortable spotting up for threes in transition. With a likely starting role this year, he’ll be counted on to provide downhill scoring and floor spacing. His NBA bloodlines and improved confidence make him a breakout candidate.",
+          "stats": { "PPG": 8.8, "RPG": 3.5, "APG": 1.0 }
+        }
+      ]
+    },
+    {
+      "name": "Memphis Grizzlies",
+      "logo": "https://cdn.nba.com/logos/nba/1610612763/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 7,
+          "player": "Mikel Brown Jr.",
+          "position": "PG/SG",
+          "school": "Louisville",
+          "bio": "Shifty 6'5\" combo guard coming off a breakout U19 World Cup performance. He can break down defenses off the dribble and is a knockdown shooter from deep. Despite a slender build that raises questions about finishing through contact, his playmaking and shot-making skills make him a dynamic backcourt talent.",
+          "stats": { "PPG": 16.0, "RPG": 3.5, "APG": 6.0 }
+        },
+        {
+          "pick": 16,
+          "player": "Tahaad Pettiford",
+          "position": "PG",
+          "school": "Auburn",
+          "bio": "Dynamic 6'0\" point guard who packs a lot of game into his smaller frame. Pettiford is an electric ball-handler and creative shot-maker, boasting one of college basketball’s best floaters and a knack for hitting pull-up jumpers. He’s lightning-quick off the dribble and uses his 6'5\" wingspan to mitigate his height on defense. With a bigger role at Auburn this year, he’s expected to showcase his ability to run an offense and score despite his size.",
+          "stats": { "PPG": 8.4, "RPG": 1.9, "APG": 2.3 }
+        }
+      ]
+    },
+    {
+      "name": "Portland Trail Blazers",
+      "logo": "https://cdn.nba.com/logos/nba/1610612757/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 8,
+          "player": "Chris Cenac Jr.",
+          "position": "PF/C",
+          "school": "Houston",
+          "bio": "Athletic 6'10\" big man with a high motor on defense and around the rim. Primarily a lob target, rebounder and rim protector, but he has shown flashes of ball-handling and shooting on the perimeter. If he can refine those skills while maintaining his interior presence, his upside grows significantly.",
+          "stats": { "PPG": 12.8, "RPG": 8.0, "APG": 1.2 }
+        }
+      ]
+    },
+    {
+      "name": "Miami Heat",
+      "logo": "https://cdn.nba.com/logos/nba/1610612748/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 9,
+          "player": "Tounde Yessoufou",
+          "position": "SG/SF",
+          "school": "Baylor",
+          "bio": "Powerfully built 6'6\" wing from Benin known for his elite athleticism and motor. Initially made his mark with defense, rebounding and transition play, and has steadily improved his ball-handling and shooting. Still developing consistency from the outside, but his physical tools make him an impact player on both ends.",
+          "stats": { "PPG": 15.4, "RPG": 6.9, "APG": 1.3 }
+        }
+      ]
+    },
+    {
+      "name": "Oklahoma City Thunder",
+      "logo": "https://cdn.nba.com/logos/nba/1610612760/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 10,
+          "player": "Caleb Wilson",
+          "position": "PF",
+          "school": "North Carolina",
+          "bio": "Athletic 6'9\" forward lauded for his defensive upside. He’s a rangy shot-blocker who can guard multiple positions and make highlight-reel blocks. Offensively he’s more of a finisher at this stage, running the floor and scoring off cuts, but if he can develop a reliable jumper or face-up game, his stock will rise.",
+          "stats": { "PPG": 13.2, "RPG": 8.5, "APG": 1.0 }
+        },
+        {
+          "pick": 26,
+          "player": "Miles Byrd",
+          "position": "SG/SF",
+          "school": "San Diego State",
+          "bio": "Long 6'7\" wing with a solid outside shot and strong defensive instincts. Byrd has the tools NBA teams look for in a role-playing wing: he can stretch the floor and has the length to guard multiple positions. He needs to improve finishing in traffic and add strength, as he struggled converting at the rim last year. If he becomes a consistent threat from three and continues to make smart defensive reads, he projects as a valuable 3-and-D rotation piece.",
+          "stats": { "PPG": 7.5, "RPG": 3.8, "APG": 1.0 }
+        },
+        {
+          "pick": 27,
+          "player": "LeJuan Watts",
+          "position": "SF/PF",
+          "school": "Texas Tech",
+          "bio": "Versatile 6'6\" forward who showcased an all-around game at Eastern Washington and now takes his talent to Texas Tech. Watts is uniquely capable of initiating offense for a forward — he averaged over 4 assists per game — and can play both inside and out. He’s a strong, physical player in the post with a soft touch and also a very efficient (41.6%) three-point shooter, albeit on low volume. If he proves his shooting can translate to a higher volume and level of competition, his blend of playmaking, strength, and efficiency could make him a first-round sleeper.",
+          "stats": { "PPG": 13.8, "RPG": 6.1, "APG": 4.4 }
+        }
+      ]
+    },
+    {
+      "name": "Sacramento Kings",
+      "logo": "https://cdn.nba.com/logos/nba/1610612758/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 11,
+          "player": "Cayden Boozer",
+          "position": "PG",
+          "school": "Duke",
+          "bio": "High-IQ 6'3\" point guard who plays a classic floor-general style. He excels at setting up teammates and running the offense with advanced feel and unselfishness. Not a high-volume scorer on a loaded Duke squad, but he has developed a solid outside shot and uses great touch on floaters to keep defenses honest.",
+          "stats": { "PPG": 11.5, "RPG": 3.0, "APG": 6.8 }
+        }
+      ]
+    },
+    {
+      "name": "Chicago Bulls",
+      "logo": "https://cdn.nba.com/logos/nba/1610612741/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 12,
+          "player": "Brayden Burries",
+          "position": "SG",
+          "school": "Arizona",
+          "bio": "Physical 6'4\" scoring guard who can generate offense in bunches. He thrives in pick-and-roll situations and is equally comfortable driving to the rim or pulling up from long range. Burries has the strength to finish through contact and a confident three-point shot (albeit streaky). Primarily a scorer, he’s shown flashes of passing ability that hint at combo-guard potential.",
+          "stats": { "PPG": 24.7, "RPG": 5.0, "APG": 3.8 }
+        }
+      ]
+    },
+    {
+      "name": "Dallas Mavericks",
+      "logo": "https://cdn.nba.com/logos/nba/1610612742/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 13,
+          "player": "Isiah Harwell",
+          "position": "SG/SF",
+          "school": "Houston",
+          "bio": "Versatile 6'6\" wing who projects as a prototypical three-and-D contributor. He’s a knockdown catch-and-shoot threat from the perimeter and can rise into smooth mid-range jumpers. Defensively, Harwell plays passing lanes well and has the size to guard multiple positions. While he’s not a primary shot creator off the dribble, his shooting and defensive skills make him a seamless fit on any roster.",
+          "stats": { "PPG": 14.8, "RPG": 4.5, "APG": 1.8 }
+        }
+      ]
+    },
+    {
+      "name": "San Antonio Spurs",
+      "logo": "https://cdn.nba.com/logos/nba/1610612759/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 14,
+          "player": "Karim Lopez",
+          "position": "PF",
+          "school": "New Zealand Breakers",
+          "bio": "Strong 6'8\" forward from Mexico who has already proven he can compete at the pro level in the NBL. Lopez is an aggressive slasher with a solid handle for his size, using his strength and body control to attack the rim. He has shown some ability to hit the open three, but improving his jump shot consistency will be key. With two years of professional experience by draft night, he offers a unique blend of youth and experience.",
+          "stats": { "PPG": 8.1, "RPG": 3.7, "APG": 1.2 }
+        }
+      ]
+    },
+    {
+      "name": "Indiana Pacers",
+      "logo": "https://cdn.nba.com/logos/nba/1610612754/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 15,
+          "player": "Braylon Mullins",
+          "position": "SG",
+          "school": "Connecticut",
+          "bio": "Sharpshooting 6'5\" guard who can light it up from beyond the arc. Mullins made a name for himself as a freshman with his elite three-point accuracy and quick release, while also surprising defenses with his athletic finishes in transition. At UConn he primarily plays off the ball, running off screens and spacing the floor. His combination of size, shooting ability, and sneaky athleticism makes him one of the most dangerous shooters in this class.",
+          "stats": { "PPG": 17.3, "RPG": 4.5, "APG": 2.1 }
+        }
+      ]
+    },
+    {
+      "name": "Milwaukee Bucks",
+      "logo": "https://cdn.nba.com/logos/nba/1610612749/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 17,
+          "player": "Dame Sarr",
+          "position": "SF",
+          "school": "Duke",
+          "bio": "Athletic 6'5\" wing who is brimming with raw potential. Sarr will play a complementary role at Duke, where his high-flying transition play and off-ball scoring will shine. He showed flashes of creating off the dribble during his time with Barcelona’s junior team, but needs to become a more consistent shooter (especially from the free throw line). If he develops a steadier jumper, his one-and-done potential as an energetic two-way wing is very high.",
+          "stats": { "PPG": 8.0, "RPG": 3.0, "APG": 1.5 }
+        }
+      ]
+    },
+    {
+      "name": "Boston Celtics",
+      "logo": "https://cdn.nba.com/logos/nba/1610612738/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 19,
+          "player": "Hannes Steinbach",
+          "position": "C",
+          "school": "Washington",
+          "bio": "Skilled 6'11\" center from Germany who brings an old-school post presence with modern touches. He dominated the U19 World Cup with 17.4 points per game on 66% shooting, showcasing excellent footwork, patience, and soft touch on the block. Steinbach also has moments of showing a jumper and athletic finishes, making him more intriguing. At Washington he will be featured in the offense, where he can display his interior scoring and playmaking from the post.",
+          "stats": { "PPG": 17.4, "RPG": 8.1, "APG": 1.0 }
+        }
+      ]
+    },
+    {
+      "name": "Detroit Pistons",
+      "logo": "https://cdn.nba.com/logos/nba/1610612765/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 20,
+          "player": "Labaron Philon",
+          "position": "PG",
+          "school": "Alabama",
+          "bio": "Crafty 6'4\" point guard who returned to Alabama to refine his game after drawing NBA interest. Philon excels at penetrating defenses, utilizing one of the best floaters in college and great touch around the rim. He’s a creative playmaker with strong defensive instincts as well. Improving his three-point shot is the next step; if he can bump up his shooting efficiency, his mix of scoring savvy and facilitation could make him a first-round steal.",
+          "stats": { "PPG": 15.2, "RPG": 3.0, "APG": 5.3 }
+        }
+      ]
+    },
+    {
+      "name": "Orlando Magic",
+      "logo": "https://cdn.nba.com/logos/nba/1610612753/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 21,
+          "player": "Yaxel Lendeborg",
+          "position": "PF",
+          "school": "Michigan",
+          "bio": "Underrated 6'9\" forward who filled the stat sheet at UAB before transferring to Michigan. Lendeborg is a high-energy interior player who finishes strong at the rim and relentlessly crashes the boards. He’s also a clever passer for a big man and can face up to score one-on-one. His jump shot has been a work in progress, but solid mid-range, free throw, and floater numbers suggest he could extend his range. With another leap in his shooting, Lendeborg projects as a versatile two-way power forward.",
+          "stats": { "PPG": 15.0, "RPG": 10.0, "APG": 3.5 }
+        }
+      ]
+    },
+    {
+      "name": "Golden State Warriors",
+      "logo": "https://cdn.nba.com/logos/nba/1610612744/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 22,
+          "player": "Patrick Ngongba II",
+          "position": "C",
+          "school": "Duke",
+          "bio": "A 6'11\", 250-pound center with a high feel for the game and a strong fundamental base. Ngongba isn’t an upside swing but rather a high-floor prospect; he has excellent hands and knows how to finish plays inside. He’s comfortable facilitating from the post and making the right pass, and he’s shown he can put the ball on the floor for controlled drives. While not a flashy player, his size, IQ, and steady production could make him a reliable rotational big in the NBA.",
+          "stats": { "PPG": 10.2, "RPG": 8.6, "APG": 2.5 }
+        }
+      ]
+    },
+    {
+      "name": "Minnesota Timberwolves",
+      "logo": "https://cdn.nba.com/logos/nba/1610612750/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 23,
+          "player": "Bennett Stirtz",
+          "position": "PG",
+          "school": "Iowa",
+          "bio": "Smooth 6'5\" guard who gained national attention with clutch performances in the NCAA tournament before transferring to Iowa. Stirtz is an efficient scorer and playmaker who rarely makes mistakes. He handles the ball with confidence, shoots at a high clip from outside, and finishes well around the rim. His creativity, basketball IQ, and strong advanced metrics help offset average athleticism. He could emerge as a Malcolm Brogdon-type mature guard at the next level.",
+          "stats": { "PPG": 15.4, "RPG": 4.8, "APG": 4.1 }
+        }
+      ]
+    },
+    {
+      "name": "New York Knicks",
+      "logo": "https://cdn.nba.com/logos/nba/1610612752/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 24,
+          "player": "Isaiah Evans",
+          "position": "SF",
+          "school": "Duke",
+          "bio": "Sharpshooting 6'6\" wing who is poised for a breakout sophomore season at Duke. Evans was lethal in spot-up situations as a freshman (48% from three on catch-and-shoot opportunities) and will now get a chance to showcase more off-the-dribble scoring that we saw in his high school days. Even if he doesn’t evolve into a creator, his size and elite shooting ability alone give him significant NBA appeal as a floor spacer.",
+          "stats": { "PPG": 12.0, "RPG": 4.0, "APG": 1.5 }
+        }
+      ]
+    },
+    {
+      "name": "Los Angeles Lakers",
+      "logo": "https://cdn.nba.com/logos/nba/1610612747/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 25,
+          "player": "Anthony Robinson II",
+          "position": "PG/SG",
+          "school": "Missouri",
+          "bio": "Underrated 6'4\" guard who fills up the stat sheet and plays both ends of the floor. Robinson is a two-way playmaker who posted an impressive combo of assist rate, steal rate, and shooting efficiency last season. He’s comfortable running the point or playing off the ball, makes smart decisions in the pick-and-roll, and his quick hands on defense generate a lot of turnovers. With a larger offensive role this year, he’s expected to boost his scoring while maintaining his all-around impact.",
+          "stats": { "PPG": 8.1, "RPG": 3.0, "APG": 4.5 }
+        }
+      ]
+    },
+    {
+      "name": "Cleveland Cavaliers",
+      "logo": "https://cdn.nba.com/logos/nba/1610612739/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 28,
+          "player": "Thomas Haugh",
+          "position": "SF/PF",
+          "school": "Florida",
+          "bio": "Athletic 6'9\" forward who offers the coveted combo of size, shooting potential, and playmaking from the frontcourt. Haugh is expected to take on a bigger role at Florida, where he can demonstrate his ability to knock down outside shots and make quick decisions with the ball. He runs the floor well and is a high-flyer when attacking the rim. Still a bit of a project in terms of strength and consistency, but his skill set as a mobile stretch-four with passing feel is highly intriguing.",
+          "stats": { "PPG": 10.0, "RPG": 5.5, "APG": 2.0 }
+        }
+      ]
+    },
+    {
+      "name": "Denver Nuggets",
+      "logo": "https://cdn.nba.com/logos/nba/1610612743/primary/L/logo.svg",
+      "picks": [
+        {
+          "pick": 29,
+          "player": "JT Toppin",
+          "position": "PF",
+          "school": "Texas Tech",
+          "bio": "Productive 6'9\" power forward who many scouts considered NBA-ready after last season. Toppin is a consistent interior scorer with excellent short-range touch and a nose for the ball on the offensive glass. He’s not the most athletic prospect, but he plays with great energy and has an advanced feel for finding scoring opportunities around the basket. While he hasn’t proven to be a reliable three-point shooter or free-throw shooter yet, he did knock down 39% of his catch-and-shoot attempts. If his range continues to improve, he could carve out a role as a high-floor rotational big.",
+          "stats": { "PPG": 15.7, "RPG": 8.8, "APG": 1.0 }
+        }
+      ]
+    }
+  ]
+}
