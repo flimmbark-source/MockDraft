@@ -1,4 +1,3 @@
-import './App.css';
 import NbaMockDraftUi from './NbaMockDraftUi';
 
 function App() {
