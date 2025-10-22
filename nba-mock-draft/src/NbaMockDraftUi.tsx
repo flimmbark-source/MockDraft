@@ -1,5 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+
+type PlayerStats = Record<string, number | string | undefined>;
 
 type Player = {
   pick: number;
@@ -7,12 +9,14 @@ type Player = {
   position: string;
   school: string;
   bio?: string;
-  stats?: {
-    ppg?: number | string;
-    rpg?: number | string;
-    apg?: number | string;
-    [key: string]: number | string | undefined;
-  };
+  stats?: PlayerStats;
+};
+
+type DraftTeam = {
+  id?: string;
+  name?: string;
+  logo?: string;
+  picks?: Player[];
 };
 
 type Team = {
@@ -20,6 +24,10 @@ type Team = {
   name: string;
   logo: string;
   picks: Player[];
+};
+
+type DraftResponse = {
+  teams?: DraftTeam[];
 };
 
 const containerVariants = {
@@ -33,39 +41,89 @@ export default function NbaMockDraftUi() {
   const [view, setView] = useState<"overview" | "team">("overview");
   const [activeTeam, setActiveTeam] = useState<Team | null>(null);
   const [activePlayer, setActivePlayer] = useState<Player | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const isMountedRef = useRef(true);
 
-  useEffect(() => {
-    let isMounted = true;
+  const loadDraft = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch("/draft.json", { cache: "no-cache" });
 
-    fetch("/draft.json", { cache: "no-cache" })
-      .then((response) => response.json())
-      .then((data) => {
-        if (!isMounted) return;
-        const fetchedTeams: Team[] = data?.teams ?? [];
-        setTeams(fetchedTeams);
-      })
-      .catch((error) => {
-        console.error("Failed to load draft data", error);
-      });
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
 
-    return () => {
-      isMounted = false;
-    };
+      const data: DraftResponse = await response.json();
+      if (!isMountedRef.current) {
+        return;
+      }
+
+      const normalizedTeams = normalizeTeams(data.teams ?? []);
+      setTeams(normalizedTeams);
+      setError(null);
+
+      if (normalizedTeams.length === 0) {
+        setActiveTeam(null);
+        setActivePlayer(null);
+        setView("overview");
+      }
+    } catch (loadError) {
+      console.error("Failed to load draft data", loadError);
+      if (!isMountedRef.current) {
+        return;
+      }
+
+      setError("Failed to load draft data. Please try again later.");
+      setTeams([]);
+      setActiveTeam(null);
+      setActivePlayer(null);
+      setView("overview");
+    } finally {
+      if (isMountedRef.current) {
+        setIsLoading(false);
+      }
+    }
   }, []);
 
   useEffect(() => {
+    isMountedRef.current = true;
+    loadDraft();
+
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, [loadDraft]);
+
+  useEffect(() => {
     if (view === "team" && activeTeam) {
-      setActivePlayer((prev) => prev ?? activeTeam.picks?.[0] ?? null);
+      setActivePlayer((previous) => previous ?? activeTeam.picks?.[0] ?? null);
     }
   }, [view, activeTeam]);
 
-  const topPickMap = useMemo(() => {
-    const map = new Map<string, number | undefined>();
-    teams.forEach((team) => {
-      map.set(team.id, team.picks?.[0]?.pick);
-    });
-    return map;
-  }, [teams]);
+  const activeTeamIndex = useMemo(() => {
+    if (!activeTeam) {
+      return -1;
+    }
+
+    return teams.findIndex((team) => team.id === activeTeam.id);
+  }, [activeTeam, teams]);
+
+  const moveToTeam = useCallback(
+    (nextIndex: number) => {
+      const nextTeam = teams[nextIndex];
+      if (!nextTeam) {
+        return;
+      }
+
+      setActiveTeam(nextTeam);
+      setActivePlayer(nextTeam.picks?.[0] ?? null);
+    },
+    [teams],
+  );
+
+  const canGoPrevious = activeTeamIndex > 0;
+  const canGoNext = activeTeamIndex >= 0 && activeTeamIndex < teams.length - 1;
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 p-4 sm:p-8">
@@ -87,20 +145,40 @@ export default function NbaMockDraftUi() {
               exit="exit"
               transition={{ duration: 0.25, ease: "easeOut" }}
             >
-              <div className="grid gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-                {teams.map((team) => (
-                  <TeamBubble
-                    key={team.id}
-                    team={team}
-                    topPick={topPickMap.get(team.id)}
-                    onSelect={() => {
-                      setActiveTeam(team);
-                      setActivePlayer(team.picks?.[0] ?? null);
-                      setView("team");
-                    }}
-                  />
-                ))}
-              </div>
+              {teams.length === 0 ? (
+                <div className="flex min-h-[220px] flex-col items-center justify-center gap-3 rounded-3xl border border-slate-800 bg-slate-900/60 p-8 text-center text-slate-400">
+                  <span className="text-sm font-medium">
+                    {isLoading ? "Loading draft data..." : "No teams available right now."}
+                  </span>
+                  {!isLoading && error ? (
+                    <>
+                      <span className="text-xs font-medium text-red-400">{error}</span>
+                      <motion.button
+                        whileTap={{ scale: 0.97 }}
+                        onClick={loadDraft}
+                        className="inline-flex items-center gap-2 rounded-full border border-sky-500/50 bg-sky-500/10 px-4 py-1.5 text-xs font-semibold text-sky-300 transition hover:border-sky-400 hover:text-sky-200"
+                      >
+                        Retry
+                      </motion.button>
+                    </>
+                  ) : null}
+                </div>
+              ) : (
+                <div className="grid gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                  {teams.map((team) => (
+                    <TeamBubble
+                      key={team.id}
+                      team={team}
+                      topPick={team.picks[0]?.pick}
+                      onSelect={() => {
+                        setActiveTeam(team);
+                        setActivePlayer(team.picks?.[0] ?? null);
+                        setView("team");
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
             </motion.section>
           )}
 
@@ -114,7 +192,7 @@ export default function NbaMockDraftUi() {
               transition={{ duration: 0.3, ease: "easeOut" }}
               className="flex flex-col gap-6"
             >
-              <div className="flex items-center justify-between gap-4">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <motion.button
                   whileTap={{ scale: 0.98 }}
                   onClick={() => {
@@ -128,17 +206,53 @@ export default function NbaMockDraftUi() {
                   Back to Teams
                 </motion.button>
 
-                <div className="flex items-center gap-3 rounded-full bg-slate-900/70 px-4 py-2">
-                  <div className="relative h-10 w-10 overflow-hidden rounded-full bg-slate-800">
-                    <img
-                      src={activeTeam.logo}
-                      alt={activeTeam.name}
-                      className="h-full w-full object-contain"
-                    />
+                <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+                  <div className="flex items-center gap-3 rounded-full bg-slate-900/70 px-4 py-2">
+                    <div className="relative h-10 w-10 overflow-hidden rounded-full border border-slate-800 bg-slate-800">
+                      {activeTeam.logo ? (
+                        <img
+                          src={activeTeam.logo}
+                          alt={activeTeam.name}
+                          loading="lazy"
+                          className="h-full w-full object-contain"
+                        />
+                      ) : (
+                        <span className="flex h-full w-full items-center justify-center text-sm font-semibold text-slate-300">
+                          {activeTeam.name.charAt(0)}
+                        </span>
+                      )}
+                    </div>
+                    <div>
+                      <p className="text-xs uppercase tracking-wide text-slate-500">Team</p>
+                      <p className="text-lg font-semibold text-slate-100">{activeTeam.name}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-slate-400">Team</p>
-                    <p className="text-lg font-semibold text-slate-100">{activeTeam.name}</p>
+                  <div className="flex items-center gap-2">
+                    <motion.button
+                      type="button"
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => moveToTeam(activeTeamIndex - 1)}
+                      disabled={!canGoPrevious}
+                      className="inline-flex items-center gap-1 rounded-full border border-slate-700 px-3 py-1.5 text-xs font-semibold text-slate-300 transition hover:border-slate-500 hover:text-white disabled:cursor-not-allowed disabled:border-slate-800 disabled:text-slate-600"
+                      aria-label="View previous team"
+                    >
+                      <span aria-hidden>←</span>
+                      Prev
+                    </motion.button>
+                    <span className="text-xs font-medium text-slate-500">
+                      {activeTeamIndex + 1} / {teams.length}
+                    </span>
+                    <motion.button
+                      type="button"
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => moveToTeam(activeTeamIndex + 1)}
+                      disabled={!canGoNext}
+                      className="inline-flex items-center gap-1 rounded-full border border-slate-700 px-3 py-1.5 text-xs font-semibold text-slate-300 transition hover:border-slate-500 hover:text-white disabled:cursor-not-allowed disabled:border-slate-800 disabled:text-slate-600"
+                      aria-label="View next team"
+                    >
+                      Next
+                      <span aria-hidden>→</span>
+                    </motion.button>
                   </div>
                 </div>
               </div>
@@ -161,6 +275,7 @@ export default function NbaMockDraftUi() {
                         <motion.button
                           key={pick.pick}
                           layout
+                          type="button"
                           whileHover={{ scale: 1.01 }}
                           whileTap={{ scale: 0.99 }}
                           onClick={() => setActivePlayer(pick)}
@@ -188,48 +303,57 @@ export default function NbaMockDraftUi() {
                   className="flex-1 rounded-2xl border border-slate-800 bg-slate-900/70 p-5"
                   transition={{ layout: { duration: 0.25, ease: "easeOut" } }}
                 >
-                  {activePlayer ? (
-                    <motion.div
-                      key={activePlayer.pick}
-                      initial={{ opacity: 0, x: 24 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -24 }}
-                      transition={{ duration: 0.25, ease: "easeOut" }}
-                      className="flex flex-col gap-4"
-                    >
-                      <div>
-                        <p className="text-xs uppercase tracking-wide text-slate-400">Pick #{activePlayer.pick}</p>
-                        <h3 className="text-2xl font-bold text-slate-100">
-                          {activePlayer.player}
-                        </h3>
-                        <p className="text-sm text-slate-400">
-                          {activePlayer.position} • {activePlayer.school}
-                        </p>
-                      </div>
-
-                      {activePlayer.bio && (
-                        <p className="rounded-lg bg-slate-950/60 p-4 text-sm leading-relaxed text-slate-300">
-                          {activePlayer.bio}
-                        </p>
-                      )}
-
-                      <div>
-                        <h4 className="text-sm font-semibold uppercase tracking-wide text-slate-300">
-                          Stats Snapshot
-                        </h4>
-                        <div className="mt-3 grid grid-cols-1 gap-3 text-sm sm:grid-cols-3">
-                          {renderStatChip("PPG", activePlayer.stats?.ppg)}
-                          {renderStatChip("RPG", activePlayer.stats?.rpg)}
-                          {renderStatChip("APG", activePlayer.stats?.apg)}
+                  <AnimatePresence mode="wait">
+                    {activePlayer ? (
+                      <motion.div
+                        key={activePlayer.pick}
+                        initial={{ opacity: 0, x: 24 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -24 }}
+                        transition={{ duration: 0.25, ease: "easeOut" }}
+                        className="flex flex-col gap-4"
+                      >
+                        <div>
+                          <p className="text-xs uppercase tracking-wide text-slate-400">Pick #{activePlayer.pick}</p>
+                          <h3 className="text-2xl font-bold text-slate-100">{activePlayer.player}</h3>
+                          <p className="text-sm text-slate-400">
+                            {activePlayer.position} • {activePlayer.school}
+                          </p>
                         </div>
-                      </div>
-                    </motion.div>
-                  ) : (
-                    <div className="flex h-full flex-col items-center justify-center gap-2 text-center text-sm text-slate-400">
-                      <span className="text-2xl">👆</span>
-                      Select a player to view their profile.
-                    </div>
-                  )}
+
+                        {activePlayer.bio ? (
+                          <p className="rounded-lg bg-slate-950/60 p-4 text-sm leading-relaxed text-slate-300">
+                            {activePlayer.bio}
+                          </p>
+                        ) : null}
+
+                        <div>
+                          <h4 className="text-sm font-semibold uppercase tracking-wide text-slate-300">
+                            Stats Snapshot
+                          </h4>
+                          <div className="mt-3 grid grid-cols-1 gap-3 text-sm sm:grid-cols-3">
+                            {renderStatChip("PPG", activePlayer.stats)}
+                            {renderStatChip("RPG", activePlayer.stats)}
+                            {renderStatChip("APG", activePlayer.stats)}
+                          </div>
+                        </div>
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="empty"
+                        initial={{ opacity: 0, x: 16 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -16 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        className="flex h-full flex-col items-center justify-center gap-2 text-center text-sm text-slate-400"
+                      >
+                        <span className="text-2xl" aria-hidden>
+                          👆
+                        </span>
+                        Select a player to view their profile.
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               </motion.div>
             </motion.section>
@@ -249,15 +373,21 @@ type TeamBubbleProps = {
 function TeamBubble({ team, topPick, onSelect }: TeamBubbleProps) {
   return (
     <motion.button
+      type="button"
       layout
       whileHover={{ y: -4 }}
       whileTap={{ scale: 0.98 }}
       onClick={onSelect}
       className="group relative flex flex-col items-center gap-3 rounded-2xl border border-slate-800 bg-slate-900/70 p-4 shadow-lg transition-colors hover:border-slate-700 hover:bg-slate-900"
+      aria-label={`View draft picks for ${team.name}`}
     >
       <div className="relative">
         <div className="flex h-20 w-20 items-center justify-center rounded-full border border-slate-800 bg-slate-950 shadow-inner">
-          <img src={team.logo} alt={team.name} className="h-16 w-16 object-contain" />
+          {team.logo ? (
+            <img src={team.logo} alt={team.name} loading="lazy" className="h-16 w-16 object-contain" />
+          ) : (
+            <span className="text-lg font-semibold text-slate-300">{team.name.charAt(0)}</span>
+          )}
         </div>
         {typeof topPick === "number" && (
           <span className="absolute -top-2 -right-2 inline-flex items-center rounded-full bg-sky-500 px-2 py-0.5 text-xs font-semibold text-slate-950 shadow">
@@ -265,20 +395,71 @@ function TeamBubble({ team, topPick, onSelect }: TeamBubbleProps) {
           </span>
         )}
       </div>
-      <span className="text-center text-sm font-medium text-slate-200 group-hover:text-white">
-        {team.name}
-      </span>
+      <span className="text-center text-sm font-medium text-slate-200 group-hover:text-white">{team.name}</span>
     </motion.button>
   );
 }
 
-function renderStatChip(label: string, value?: number | string) {
+function renderStatChip(label: string, stats?: PlayerStats) {
+  const value = resolveStatValue(stats, label);
+
   return (
     <div className="rounded-xl border border-slate-800 bg-slate-950/70 px-4 py-3 text-center">
       <p className="text-xs uppercase tracking-wide text-slate-500">{label}</p>
-      <p className="mt-1 text-lg font-semibold text-slate-100">
-        {value ?? "--"}
-      </p>
+      <p className="mt-1 text-lg font-semibold text-slate-100">{value ?? "--"}</p>
     </div>
   );
+}
+
+function resolveStatValue(stats: PlayerStats | undefined, key: string) {
+  if (!stats) {
+    return undefined;
+  }
+
+  if (stats[key] !== undefined) {
+    return stats[key];
+  }
+
+  const lowerKey = key.toLowerCase();
+  if (stats[lowerKey] !== undefined) {
+    return stats[lowerKey];
+  }
+
+  const upperKey = key.toUpperCase();
+  if (stats[upperKey] !== undefined) {
+    return stats[upperKey];
+  }
+
+  return undefined;
+}
+
+function normalizeTeams(rawTeams: DraftTeam[]): Team[] {
+  return rawTeams.map((team, index) => {
+    const picks = [...(team.picks ?? [])].sort((first, second) => first.pick - second.pick);
+
+    return {
+      id: createTeamId(team, index),
+      name: team.name ?? `Team ${index + 1}`,
+      logo: team.logo ?? "",
+      picks,
+    };
+  });
+}
+
+function createTeamId(team: DraftTeam, index: number) {
+  if (team.id && team.id.trim().length > 0) {
+    return team.id;
+  }
+
+  if (team.name && team.name.trim().length > 0) {
+    const slug = team.name
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+
+    return slug.length > 0 ? `${slug}-${index}` : `team-${index}`;
+  }
+
+  return `team-${index}`;
 }
