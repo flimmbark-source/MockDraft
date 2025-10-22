@@ -164,7 +164,7 @@ export default function NbaMockDraftUi() {
                   ) : null}
                 </div>
               ) : (
-                <div className="grid grid-cols-1 gap-3 min-[420px]:grid-cols-2 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5">
+                <div className="grid grid-cols-1 gap-2 min-[360px]:grid-cols-2 min-[480px]:gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5">
                   {teams.map((team) => (
                     <TeamBubble
                       key={team.id}
@@ -378,17 +378,17 @@ function TeamBubble({ team, topPick, onSelect }: TeamBubbleProps) {
       whileHover={{ y: -4 }}
       whileTap={{ scale: 0.98 }}
       onClick={onSelect}
-      className="group relative flex flex-col items-center gap-1.5 rounded-2xl border border-slate-800 bg-slate-900/70 p-3 shadow-lg transition-colors hover:border-slate-700 hover:bg-slate-900 min-[420px]:gap-2 sm:gap-3 sm:p-4"
+      className="group relative flex flex-col items-center gap-1 rounded-2xl border border-slate-800 bg-slate-900/70 p-2.5 shadow-lg transition-colors hover:border-slate-700 hover:bg-slate-900 min-[360px]:gap-1.5 min-[480px]:p-3 min-[480px]:gap-2 sm:gap-3 sm:p-4"
       aria-label={`View draft picks for ${team.name}`}
     >
       <div className="relative">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full border border-slate-800 bg-slate-950 shadow-inner min-[420px]:h-16 min-[420px]:w-16 sm:h-20 sm:w-20">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full border border-slate-800 bg-slate-950 shadow-inner min-[360px]:h-14 min-[360px]:w-14 min-[480px]:h-16 min-[480px]:w-16 sm:h-20 sm:w-20">
           {team.logo ? (
             <img
               src={team.logo}
               alt={team.name}
               loading="lazy"
-              className="h-10 w-10 object-contain min-[420px]:h-12 min-[420px]:w-12 sm:h-16 sm:w-16"
+              className="h-8 w-8 object-contain min-[360px]:h-10 min-[360px]:w-10 min-[480px]:h-12 min-[480px]:w-12 sm:h-16 sm:w-16"
             />
           ) : (
             <span className="text-lg font-semibold text-slate-300">{team.name.charAt(0)}</span>
